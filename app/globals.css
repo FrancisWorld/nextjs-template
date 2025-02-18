@@ -34,11 +34,11 @@
   ---break---
 */
 :root {
-  --background: hsl(0 0% 100%);
+  --background: hsl(48, 25%, 92%);
   --foreground: hsl(0 0% 3.9%);
-  --card: hsl(0 0% 100%);
+  --card: hsl(48, 25%, 92%);
   --card-foreground: hsl(0 0% 3.9%);
-  --popover: hsl(0 0% 100%);
+  --popover: hsl(48, 25%, 92%);
   --popover-foreground: hsl(0 0% 3.9%);
   --primary: hsl(0 0% 9%);
   --primary-foreground: hsl(0 0% 98%);
@@ -219,6 +219,21 @@
     90% {
       bottom: 50%;
       right: 25%;
+    }
+  }
+  --animate-shine: shine var(--duration) infinite linear;
+  /*
+  ---break---
+*/
+  @keyframes shine {
+    0% {
+      background-position: 0% 0%;
+    }
+    50% {
+      background-position: 100% 100%;
+    }
+    to {
+      background-position: 0% 0%;
     }
   }
 }
