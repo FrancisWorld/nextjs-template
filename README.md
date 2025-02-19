@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Create Chico App
 
-## Getting Started
+Uma maneira moderna de iniciar projetos Next.js com configurações pré-definidas e componentes úteis.
 
-First, run the development server:
+## Características
+
+- 🏃‍♂️ Next.js 15 com App Router e Turbopack
+- 💨 Tailwind V4 para estilização
+- 🎨 Tema claro/escuro com next-themes
+- 🧱 Componentes shadcn/ui pré-configurados
+- 🎯 Tipagem forte com TypeScript
+- 🧹 Formatação com Biome
+
+## Início Rápido
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
+bunx --use-bun create-chico-app
+cd meu-projeto
+bun install
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abra [http://localhost:3000](http://localhost:3000) no seu navegador para ver o resultado.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Adicionando Componentes shadcn/ui
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+⚠️ **Importante**: Ao adicionar novos componentes do shadcn/ui, sempre use a flag `@canary`:
 
-## Learn More
+```bash
+bunx --bun shadcn@canary add button
+```
 
-To learn more about Next.js, take a look at the following resources:
+Não use `@latest`, pois pode causar incompatibilidades com as versões mais recentes do Next.js e Tailwind CSS.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Estrutura do Projeto
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+├── app/                # Rotas e páginas
+├── components/         # Componentes React
+│   ├── ui/            # Componentes shadcn/ui
+│   └── magicui/       # Componentes com efeitos especiais
+├── providers/         # Providers React (tema, etc)
+└── lib/              # Utilitários e configurações
+```
 
-## Deploy on Vercel
+## Providers Disponíveis
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+O projeto já vem com os seguintes providers configurados:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `ThemeProvider`: Gerenciamento de tema (claro/escuro)
+- `TooltipProvider`: Gerenciamento de tooltips
+
+Para adicionar novos providers, utilize o arquivo `providers/provider-wrapper.tsx`.
+
+## Scripts Disponíveis
+
+- `bun dev`: Inicia o servidor de desenvolvimento
+- `bun build`: Gera a build de produção
+- `bun start`: Inicia o servidor de produção
+- `bun lint`: Executa a verificação de linting
+
+## Aprenda Mais
+
+Para saber mais sobre as tecnologias utilizadas:
+
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Tailwind V4](https://tailwindcss.com/)
+- [shadcn/ui](https://ui.shadcn.com)
+- [Bun Runtime](https://bun.sh)
+
+## Deploy
+
+A maneira mais fácil de fazer deploy é usando a [Plataforma Vercel](https://vercel.com/new). Confira a [documentação de deploy do Next.js](https://nextjs.org/docs/app/building-your-application/deploying) para mais detalhes.

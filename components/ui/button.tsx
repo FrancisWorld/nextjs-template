@@ -1,6 +1,7 @@
 import { cn } from '@/lib/utils';
 import { Slot, Slottable } from '@radix-ui/react-slot';
 import { cva, type VariantProps } from 'class-variance-authority';
+import { ArrowRight } from 'lucide-react';
 import * as React from 'react';
 
 const buttonVariants = cva(
@@ -14,6 +15,7 @@ const buttonVariants = cva(
         secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
         ghost: 'hover:bg-accent hover:text-accent-foreground',
         link: 'text-primary underline-offset-4 hover:underline',
+        interactive: 'group relative w-auto cursor-pointer overflow-hidden rounded-full border bg-background p-2 px-6 text-center font-semibold',
       },
       effect: {
         expandIcon: 'group gap-0 relative',
@@ -64,6 +66,24 @@ export type ButtonIconProps = IconProps | IconRefProps;
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps & ButtonIconProps>(
   ({ className, variant, effect, size, icon: Icon, iconPlacement, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : 'button';
+    
+    if (variant === 'interactive') {
+      return (
+        <Comp className={cn(buttonVariants({ variant, effect, size, className }))} ref={ref} {...props}>
+          <div className="flex items-center gap-2">
+            <div className="h-2 w-2 rounded-full bg-primary transition-all duration-300 group-hover:scale-[100.8]"></div>
+            <span className="inline-block transition-all duration-300 group-hover:translate-x-12 group-hover:opacity-0">
+              {props.children}
+            </span>
+          </div>
+          <div className="absolute top-0 z-10 flex h-full w-full translate-x-12 items-center justify-center gap-2 text-primary-foreground opacity-0 transition-all duration-300 group-hover:-translate-x-5 group-hover:opacity-100">
+            <span>{props.children}</span>
+            <ArrowRight className="h-4 w-4" />
+          </div>
+        </Comp>
+      );
+    }
+
     return (
       <Comp className={cn(buttonVariants({ variant, effect, size, className }))} ref={ref} {...props}>
         {Icon &&
